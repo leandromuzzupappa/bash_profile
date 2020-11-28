@@ -37,12 +37,14 @@ PS1="$EMOJI >"
 # DIRECTORIES
 alias go="cd "
 alias open="explorer"
+alias devel="E:/delvel"
 alias curso="E:/delvel/cursos/digitalHouse"
 alias teoria="E:/delvel/cursos/digitalHouse/teoria-js"
 alias _clases="E:/delvel/cursos/digitalHouse/clases"
 alias _proyectos="E:/delvel/cursos/digitalHouse/proyectos"
 
 # GIT ALIASES
+alias gs="git status"
 alias gaa="git add ."
 alias gcm="git commit -m"
 alias gpsh="git push"
@@ -55,3 +57,8 @@ alias gcD="git checkout -D"
 
 # OTHER
 alias cls="clear"
+
+# GLAMIT SCRIPTS
+gcbb () { git checkout -b bugfix/GLAMIT-$1; }
+gcbf () { git checkout -b feature/GLAMIT-$1; }
+gcbh () { git checkout -b hotfix/GLAMIT-$1; }

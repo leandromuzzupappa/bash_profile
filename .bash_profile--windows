@@ -1,0 +1,57 @@
+HOST_NAME=leandromuzzupappa
+
+shopt -s autocd
+shopt -s histappend
+
+bind '"\e[A": history-search-backward'
+bind '"\e[B": history-search-forward'
+
+export CLICOLOR=1
+export LSCOLORS=GxFxCxDxBxegedabagaced
+
+txtred="\e[0;31m"   # red
+txtgrn="\e[0;32m"   # green
+bldgrn="\e[1;32m"   # bold green
+bldpur="\e[1;35m"   # bold purple
+txtrst="\e[0m"      # text reset
+
+emojis=("🌵" "🛌" "🌎" "🍄" "👾")
+EMOJI=${emojis[$RANDOM % ${#emojis[@]} ]}
+
+parse_git_branch() {
+ git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/'
+}
+
+print_before_the_prompt () {
+    dir=$PWD
+    home=$HOME
+    dir=${dir/"$HOME"/"~"}
+    printf "\n $txtgrn%s: $bldpur%s $txtred%s\n$txtrst" "$HOST_NAME" "$dir" $(__git_ps1 '(%s)')
+}
+
+PROMPT_COMMAND=print_before_the_prompt
+PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
+PS1="$EMOJI >"
+
+
+# DIRECTORIES
+alias go="cd "
+alias open="explorer"
+alias curso="E:/delvel/cursos/digitalHouse"
+alias teoria="E:/delvel/cursos/digitalHouse/teoria-js"
+alias _clases="E:/delvel/cursos/digitalHouse/clases"
+alias _proyectos="E:/delvel/cursos/digitalHouse/proyectos"
+
+# GIT ALIASES
+alias gaa="git add ."
+alias gcm="git commit -m"
+alias gpsh="git push"
+alias gpll="git pull"
+alias gm="git merge"
+alias gc="git checkout"
+alias gcb="git checkout -b"
+alias gcd="git checkout -d"
+alias gcD="git checkout -D"
+
+# OTHER
+alias cls="clear"

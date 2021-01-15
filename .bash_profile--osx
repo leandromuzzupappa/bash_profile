@@ -1,0 +1,91 @@
+HOST_NAME=leandromuzzupappa
+
+source ~/.nvm/nvm.sh
+nvm use stable
+shopt -s autocd
+shopt -s histappend
+
+export PATH=$PATH:$HOME/bin
+
+# Export path for Composer
+export PATH="~/.composer/vendor/bin:$PATH"
+
+export HISTSIZE=5000
+export HISTFILESIZE=10000
+
+bind '"\e[A": history-search-backward'
+bind '"\e[B": history-search-forward'
+
+export CLICOLOR=1
+export LSCOLORS=GxFxCxDxBxegedabagaced
+
+txtred='\e[0;31m' # Red
+txtgrn='\e[0;32m' # Green
+bldgrn='\e[1;32m' # Bold Green
+bldpur='\e[1;35m' # Bold Purple
+txtrst='\e[0m'    # Text Reset
+
+emojis=("🌵" "🛌" "🌎" "🍄" "👾")
+
+EMOJI=${emojis[$RANDOM % ${#emojis[@]} ]}
+
+
+print_before_the_prompt () {
+    dir=$PWD
+    home=$HOME
+    dir=${dir/"$HOME"/"~"}
+    printf "\n $txtred%s: $bldpur%s $txtgrn%s\n$txtrst" "$HOST_NAME" "$dir" "$(vcprompt)"
+}
+
+PROMPT_COMMAND=print_before_the_prompt
+PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
+PS1="$EMOJI >"
+
+fortune | cowsay -f head-in
+
+function mkcd() {
+    mkdir $1 $$ cd $1
+}
+
+# --------------
+# Aliases
+# --------------
+alias o="open ."    # Abre en el finde el directorio actual
+alias ll="ls -al"   # Lista todos los archivos en el directorio actual en formato largo
+alias l="ls"        # Lista todo slos archivos del directorio
+alias laravel='~/.composer/vendor/bin/laravel'  # Bindeo laravel para que me traiga el instalador
+alias godh='Sites/cursos/dh'
+
+
+# --------------
+# Git Aliases
+# --------------
+alias ga='git add'
+alias gaa='git add .'
+alias gaaa='git add -A'
+alias gcm='git commit -m'
+alias gc='git checkout'
+alias gcb='git checkout -b'
+alias gcd='git checkout -d'
+alias gd='git diff'
+alias gi='git init'
+alias gl='git log'
+alias gpll='git pull'
+alias gpsh='git push'
+alias gss='git status -s'
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+# --------------
+# Mongo Aliases
+# --------------
+alias mongod='brew services run mongodb-community'
+alias mongod-stop='brew services stop mongodb-community'
+alias mongod-status='brew services list'
+alias mongod-folder='o /System/Volumes/Data/data/db'
+
+# --------------
+# Misc Aliases
+# --------------
+alias dh='/Users/leandromuzzupappa/Sites/cursos/digitalhouse'
+
+
